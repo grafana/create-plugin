@@ -22,6 +22,9 @@ export const versionedAPIs = {
     datasourceByUID: {
       [MIN_GRAFANA_VERSION]: (uid: string) => `/api/datasources/uid/${uid}`,
     },
+    annotations: {
+      [MIN_GRAFANA_VERSION]: '/api/annotations',
+    },
   },
   Dashboard: {
     delete: {
