@@ -6,6 +6,7 @@ import { GrafanaPage } from './GrafanaPage';
 import { PanelEditPage } from './PanelEditPage';
 import { TimeRange } from './TimeRange';
 import { Request, Response } from '@playwright/test';
+import { QueryResponseAggregator } from './RequestAwaiter';
 
 export class DashboardPage extends GrafanaPage {
   dataSourcePicker: any;
@@ -54,18 +55,8 @@ export class DashboardPage extends GrafanaPage {
   }
 
   async gotoAndWaitForQueryResponses(options?: NavigateOptions): Promise<Response[]> {
-    return new Promise(async (resolve) => {
-      this.requests = [];
-      this.ctx.page.on('request', this.handleRequest.bind(this));
-
+    return QueryResponseAggregator(this.ctx.page, this.ctx.selectors, async () => {
       await this.goto({ ...options, waitUntil: 'networkidle' });
-      await this.ctx.page.locator('#pageContent').click();
-      await this.ctx.page.keyboard.down('End');
-
-      setTimeout(async () => {
-        this.ctx.page.removeListener('request', this.handleRequest);
-        resolve(Promise.all(this.requests));
-      }, 2000);
     });
   }
 
@@ -98,31 +89,9 @@ export class DashboardPage extends GrafanaPage {
     await this.ctx.request.delete(this.ctx.selectors.apis.Dashboard.delete(this.dashboard.uid));
   }
 
-  private handleRequest(request: Request) {
-    const url = request.url();
-    const isQueryUrl =
-      url.includes(this.ctx.selectors.apis.DataSource.query) ||
-      url.includes(this.ctx.selectors.apis.DataSource.annotations);
-    if (isQueryUrl && request.headers()['x-panel-id']) {
-      this.requests.push(request.response());
-    }
-  }
-
   async refreshDashboard(): Promise<Response[]> {
-    this.requests = [];
-    this.ctx.page.on('request', this.handleRequest.bind(this));
-
-    await this.ctx.page.keyboard.down('Home');
-    await this.getByTestIdOrAriaLabel(this.ctx.selectors.components.RefreshPicker.runButtonV2).click();
-    // focus on the page content and scroll to bottom so all dashboard queries get executed
-    await this.ctx.page.locator('#pageContent').click();
-    await this.ctx.page.keyboard.down('End');
-    return new Promise(async (resolve) => {
-      // wait for 1 second to make sure all queries have been executed
-      setTimeout(async () => {
-        this.ctx.page.removeListener('request', this.handleRequest);
-        resolve(Promise.all(this.requests));
-      }, 2000);
+    return QueryResponseAggregator(this.ctx.page, this.ctx.selectors, async () => {
+      await this.getByTestIdOrAriaLabel(this.ctx.selectors.components.RefreshPicker.runButtonV2).click();
     });
   }
 }
