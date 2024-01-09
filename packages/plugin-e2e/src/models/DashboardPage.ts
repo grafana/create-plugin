@@ -1,12 +1,11 @@
 const gte = require('semver/functions/gte');
-import EventEmitter from 'node:events';
 import { DashboardPageArgs, NavigateOptions, PluginTestCtx } from '../types';
 import { DataSourcePicker } from './DataSourcePicker';
 import { GrafanaPage } from './GrafanaPage';
 import { PanelEditPage } from './PanelEditPage';
 import { TimeRange } from './TimeRange';
-import { Request, Response } from '@playwright/test';
-import { QueryResponseAggregator } from './RequestAwaiter';
+import { Response } from '@playwright/test';
+import { queryResponseAggregator } from './utils';
 
 export class DashboardPage extends GrafanaPage {
   dataSourcePicker: any;
@@ -23,7 +22,7 @@ export class DashboardPage extends GrafanaPage {
   /**
    * Navigates to the dashboard page. If a dashboard uid was not provided, it's assumed that it's a new dashboard.
    */
-  async goto(options?: NavigateOptions) {
+  async goto(options: NavigateOptions = { waitUntil: 'load' }) {
     let url = this.dashboard?.uid
       ? this.ctx.selectors.pages.Dashboard.url(this.dashboard.uid)
       : this.ctx.selectors.pages.AddDashboard.url;
@@ -37,8 +36,8 @@ export class DashboardPage extends GrafanaPage {
     return super.navigate(url, options);
   }
 
-  async gotoAndWaitForQueryResponses(options?: NavigateOptions): Promise<Response[]> {
-    return QueryResponseAggregator(this.ctx.page, this.ctx.selectors, async () => {
+  async gotoAndWaitForQueries(options?: NavigateOptions): Promise<Response[]> {
+    return queryResponseAggregator(this.ctx.page, this.ctx.selectors, async () => {
       await this.goto({ ...options, waitUntil: 'networkidle' });
     });
   }
@@ -87,7 +86,7 @@ export class DashboardPage extends GrafanaPage {
    * Clicks the run button in the refresh picker to refresh the dashboard
    */
   async refreshDashboard(): Promise<Response[]> {
-    return QueryResponseAggregator(this.ctx.page, this.ctx.selectors, async () => {
+    return queryResponseAggregator(this.ctx.page, this.ctx.selectors, async () => {
       await this.getByTestIdOrAriaLabel(this.ctx.selectors.components.RefreshPicker.runButtonV2).click();
     });
   }
