@@ -1,12 +1,12 @@
 import toBeOK from './toBeOK';
-import allToBeOK from './allToBeOK';
+import toHaveNSuccessfulResponses from './toHaveNSuccessfulResponses';
 import toHavePanelError from './toHavePanelError';
 import toDisplayPreviews from './toDisplayPreviews';
 import toHaveAlert from './toHaveAlert';
 
 export default {
   toBeOK,
-  allToBeOK,
+  toHaveNSuccessfulResponses,
   toHavePanelError,
   toDisplayPreviews,
   toHaveAlert,

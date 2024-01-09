@@ -1,3 +1,4 @@
+import { Response } from '@playwright/test';
 import { GrafanaPage, VariableEditPage } from './models';
 import { AlertPageOptions, AlertVariant, ContainTextOptions, PanelError } from './types';
 
@@ -16,7 +17,7 @@ declare global {
       [t]: T;
 
       /**
-       * Await the response of a Playwright request and asserts the response was successful (status in the range 200-299).
+       * Asserts that the Playwright response/responses is/are successful (status in the range 200-299).
        */
       toBeOK(this: Matchers<unknown, Response | Response[]>): R;
 
@@ -38,6 +39,11 @@ declare global {
        * Asserts that the number of panel errors displayed on the page is equal to 1.
        */
       toHavePanelError(this: Matchers<unknown, PanelError>): R;
+
+      /**
+       * Asserts that a given number of the Playwright responses are successful (status in the range 200-299).
+       */
+      toHaveNSuccessfulResponses(this: Matchers<unknown, Response[]>, n: number): R;
     }
   }
 }
