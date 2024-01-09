@@ -1,3 +1,92 @@
+# (Fri Jan 05 2024)
+
+#### 🐛 Bug Fix
+
+- `@grafana/plugin-e2e@0.6.1`
+  - Plugin E2E: Re-adding a few selectors [#644](https://github.com/grafana/plugin-tools/pull/644) ([@sunker](https://github.com/sunker))
+
+#### 🔩 Dependency Updates
+
+- Chore(deps-dev): Bump @swc/jest from 0.2.20 to 0.2.29 [#631](https://github.com/grafana/plugin-tools/pull/631) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+
+#### Authors: 2
+
+- [@dependabot[bot]](https://github.com/dependabot[bot])
+- Erik Sundell ([@sunker](https://github.com/sunker))
+
+---
+
+# (Fri Jan 05 2024)
+
+#### 🐛 Bug Fix
+
+- `@grafana/create-plugin@2.10.2`
+  - Github workflows: Add correct permissions to the release workflow [#642](https://github.com/grafana/plugin-tools/pull/642) ([@leventebalogh](https://github.com/leventebalogh))
+
+#### Authors: 1
+
+- Levente Balogh ([@leventebalogh](https://github.com/leventebalogh))
+
+---
+
+# (Fri Jan 05 2024)
+
+#### 🚀 Enhancement
+
+- `@grafana/plugin-e2e@0.6.0`
+  - Plugin E2E: Tidy up selectors [#641](https://github.com/grafana/plugin-tools/pull/641) ([@sunker](https://github.com/sunker))
+
+#### Authors: 1
+
+- Erik Sundell ([@sunker](https://github.com/sunker))
+
+---
+
+# (Thu Jan 04 2024)
+
+#### 🚀 Enhancement
+
+- `@grafana/plugin-e2e@0.5.0`
+  - Plugin E2E: Comment public apis [#640](https://github.com/grafana/plugin-tools/pull/640) ([@sunker](https://github.com/sunker))
+
+#### Authors: 1
+
+- Erik Sundell ([@sunker](https://github.com/sunker))
+
+---
+
+# (Tue Jan 02 2024)
+
+#### 🚀 Enhancement
+
+- `@grafana/plugin-e2e@0.4.0`
+  - Plugin-E2E: Allow provisioningRootDir to be overridden [#623](https://github.com/grafana/plugin-tools/pull/623) ([@sunker](https://github.com/sunker))
+
+#### Authors: 1
+
+- Erik Sundell ([@sunker](https://github.com/sunker))
+
+---
+
+# (Tue Jan 02 2024)
+
+#### 🚀 Enhancement
+
+- `@grafana/plugin-e2e@0.3.0`
+  - Plugin E2E: Enable testing panel plugins [#616](https://github.com/grafana/plugin-tools/pull/616) ([@sunker](https://github.com/sunker))
+
+#### 🔩 Dependency Updates
+
+- Chore(deps): Bump cookiejs from 2.1.2 to 2.1.3 [#601](https://github.com/grafana/plugin-tools/pull/601) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Chore(deps-dev): Bump jest and @types/jest [#598](https://github.com/grafana/plugin-tools/pull/598) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+
+#### Authors: 2
+
+- [@dependabot[bot]](https://github.com/dependabot[bot])
+- Erik Sundell ([@sunker](https://github.com/sunker))
+
+---
+
 # (Tue Dec 19 2023)
 
 #### 🚀 Enhancement
