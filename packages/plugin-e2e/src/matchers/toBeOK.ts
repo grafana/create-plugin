@@ -1,11 +1,7 @@
 import { Response } from '@playwright/test';
 import { getMessage } from './utils';
 
-const toBeOK = async (request: Response | Promise<Response>) => {
-  let pass = false;
-  let actual;
-  let message: any = 'Response status code is within 200..299 range.';
-
+const toBeOK = async (res: Response) => {
   try {
     const response = await request;
     return {
