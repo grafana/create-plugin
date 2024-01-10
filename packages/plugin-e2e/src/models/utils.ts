@@ -9,8 +9,8 @@ export function queryResponseAggregator(
   return new Promise(async (resolve) => {
     const responses: Array<Promise<Response | null>> = [];
 
-    const handleRequest = (request: Request) => {
-      if (request.url().includes(selectors.apis.DataSource.query)) {
+      const panelId = request.headers()['x-panel-id'];
+      if (request.url().includes(selectors.apis.DataSource.query) && panelId) {
         responses.push(request.response());
       }
     };
