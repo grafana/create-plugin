@@ -1,6 +1,6 @@
 ---
 id: annotation-queries
-title: Annotation queries
+title: Test an annotation editor
 description: Test a custom annotation editor and the execution of annotation queries.
 keywords:
   - grafana
@@ -15,7 +15,7 @@ sidebar_position: 50
 
 ## Introduction
 
-Annotations are used to mark points on a visualization with events such as "AB test started" or "Marketing campaign started". Data source plugins that support annotations can be used to query for annotation events. Optionally, you can implement a custom annotation editor for the data source plugin that assists users in writing the annotation query. 
+Annotations are used to mark points on a visualization with events such as "AB test started" or "Marketing campaign started". Data source plugins that support annotations can be used to query for annotation events. Optionally, you can implement a custom annotation editor for the data source plugin that assists users in writing the annotation query.
 
 In many cases, the execution of annotation queries requires different handling than normal data queries, and in those cases we recommend that you write end-to-end tests that verify that data source annotations work as expected.
 
