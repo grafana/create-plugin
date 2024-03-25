@@ -132,6 +132,38 @@ export class PanelEditPage extends GrafanaPage {
   }
 
   /**
+   * Clicks the "Query +" button which adds a new query to the panel
+   * Returns the locator for the new query
+   */
+  async addQuery() {
+    await this.getByTestIdOrAriaLabel(this.ctx.selectors.components.QueryTab.addQuery).click();
+    return this.getByTestIdOrAriaLabel(this.ctx.selectors.components.QueryEditorRows.rows).last();
+  }
+
+  /**
+   * Clicks the "Expression +" button which adds a new expression query to the panel
+   * Returns the locator for the new expression query
+   */
+  async addExpression(options?: { refId?: string }) {
+    const expressionButton = semver.lt(this.ctx.grafanaVersion, '9.5.0')
+      ? this.ctx.page.getByRole('button', { name: 'Expression' })
+      : this.getByTestIdOrAriaLabel(this.ctx.selectors.components.QueryTab.addExpression);
+    await expressionButton.click();
+    const locator = this.getByTestIdOrAriaLabel(this.ctx.selectors.components.QueryEditorRows.rows).last();
+
+    if (options?.refId) {
+      await this.getByTestIdOrAriaLabel(this.ctx.selectors.components.QueryEditorRow.title(''), {
+        startsWith: true,
+        root: locator,
+      }).click();
+      await this.ctx.page.keyboard.insertText(options.refId);
+      await this.ctx.page.keyboard.press('Tab');
+    }
+
+    return locator;
+  }
+
+  /**
    * Clicks the "Refresh" button in the panel editor. Returns the response promise for the data query
    * 
    * By default, this method will wait for any response that has the url '/api/ds/query'. 

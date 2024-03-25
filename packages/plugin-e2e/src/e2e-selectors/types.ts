@@ -58,6 +58,10 @@ export type Components = {
   RefreshPicker: {
     runButtonV2: string;
   };
+  QueryTab: {
+    addQuery: string;
+    addExpression: string;
+  };
   QueryEditorRows: {
     rows: string;
   };
