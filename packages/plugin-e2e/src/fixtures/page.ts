@@ -16,6 +16,8 @@ type PageFixture = TestFixture<Page, PlaywrightArgs>;
  * The script is evaluated after the document was created but before any of its scripts were run.
  */
 export const page: PageFixture = async ({ page, featureToggles }, use) => {
+  const session = await page.context().newCDPSession(page);
+  await session.send('Performance.enable');
   if (Object.keys(featureToggles).length > 0) {
     try {
       await page.addInitScript(overrideFeatureToggles, featureToggles);
@@ -25,4 +27,7 @@ export const page: PageFixture = async ({ page, featureToggles }, use) => {
   }
   await page.goto('/');
   await use(page);
+  await page.waitForTimeout(3000);
+  let performanceMetrics = await session.send('Performance.getMetrics');
+  console.log(performanceMetrics.metrics);
 };
