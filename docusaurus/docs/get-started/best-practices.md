@@ -12,7 +12,7 @@ sidebar_position: 30
 
 # Best practices for plugin development
 
-We have compiled a list of practices for building and publishing high-quality plugins for Grafana that we have found beneficial. Refer to them when building your own plugin for best results.
+We've compiled a list of practices for building and publishing high-quality plugins for Grafana that we have found beneficial. Refer to them when building your own plugin for best results.
 
 Is something missing from this list? [Let us know](https://github.com/grafana/plugin-tools/issues/new).
 
