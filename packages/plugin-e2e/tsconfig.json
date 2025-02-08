@@ -1,14 +1,12 @@
 {
   "$schema": "https://json.schemastore.org/tsconfig",
   "compilerOptions": {
-    "lib": ["es2023", "dom"],
-    "outDir": "./dist",
-    "stripInternal": true,
-    "removeComments": false,
+    "allowJs": true,
     "declaration": true,
-    "allowJs": true
+    "lib": ["es2023", "dom"],
+    "removeComments": false,
+    "stripInternal": true
   },
   "exclude": ["node_modules"],
-  "extends": "../../tsconfig.base.json",
-  "include": ["src"]
+  "extends": "../../tsconfig.base.json"
 }

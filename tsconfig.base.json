@@ -8,7 +8,10 @@
     "noImplicitReturns": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
+    "outDir": "${configDir}/dist",
     "removeComments": true,
     "types": ["vitest/globals"]
-  }
+  },
+  "exclude": ["node_modules"],
+  "include": ["${configDir}/src"]
 }
